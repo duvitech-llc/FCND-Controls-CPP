@@ -70,10 +70,16 @@ VehicleCommand QuadControl::GenerateMotorCommands(float collThrustCmd, V3F momen
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
 
-  cmd.desiredThrustsN[0] = mass * 9.81f / 4.f; // front left
-  cmd.desiredThrustsN[1] = mass * 9.81f / 4.f; // front right
-  cmd.desiredThrustsN[2] = mass * 9.81f / 4.f; // rear left
-  cmd.desiredThrustsN[3] = mass * 9.81f / 4.f; // rear right
+    float l = L / sqrtf(2.f);
+    float t1 = momentCmd.x / l;
+    float t2 = momentCmd.y / l;
+    float t3 = -momentCmd.z / kappa;
+    float t4 = collThrustCmd;
+
+    cmd.desiredThrustsN[0] = (t1 + t2 + t3 + t4) / 4.f;  // front left  
+    cmd.desiredThrustsN[1] = (-t1 + t2 - t3 + t4) / 4.f; // front right 
+    cmd.desiredThrustsN[2] = (t1 - t2 - t3 + t4) / 4.f; // rear left   
+    cmd.desiredThrustsN[3] = (-t1 - t2 + t3 + t4) / 4.f; // rear right 
 
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 
@@ -97,9 +103,10 @@ V3F QuadControl::BodyRateControl(V3F pqrCmd, V3F pqr)
   V3F momentCmd;
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
-
   
-
+  V3F pqr_error = pqrCmd - pqr;
+  momentCmd = kpPQR * V3F(Ixx, Iyy, Izz) * pqr_error;
+ 
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 
   return momentCmd;
@@ -129,7 +136,23 @@ V3F QuadControl::RollPitchControl(V3F accelCmd, Quaternion<float> attitude, floa
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
 
+  if (collThrustCmd > 0) {
+      float c_d = -collThrustCmd / mass;
+      float b_x_cmd = CONSTRAIN(accelCmd.x / c_d, -maxTiltAngle, maxTiltAngle);
+      float b_x_err = b_x_cmd - R(0, 2);
+      float b_x_p_term = kpBank * b_x_err;
 
+      float b_y_cmd = CONSTRAIN(accelCmd.y / c_d, -maxTiltAngle, maxTiltAngle);
+      float b_y_err = b_y_cmd - R(1, 2);
+      float b_y_p_term = kpBank * b_y_err;
+
+      pqrCmd.x = (R(1, 0) * b_x_p_term - R(0, 0) * b_y_p_term) / R(2, 2);
+      pqrCmd.y = (R(1, 1) * b_x_p_term - R(0, 1) * b_y_p_term) / R(2, 2);
+  }
+  else {
+      pqrCmd.x = 0.0;
+      pqrCmd.y = 0.0;
+  }
 
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 
