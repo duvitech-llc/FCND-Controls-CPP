@@ -152,12 +152,13 @@ maxHorizAccel = 12
 maxTiltAngle = .7
 ```
 
-![QuadcControl.cpp](src/QuadcControl.cpp)
+![QuadcControl.cpp](src/QuadControl.cpp)
 
-### Scenario Intro 1 ###
+### Scenario 1 - Intro ###
 
+Quadcoptor mass
 
-![Scenario Intro 1](animations/scenario1.gif)
+![Scenario 1](animations/scenario1.gif)
 
 ```
 SIMULATOR!
@@ -174,12 +175,93 @@ Simulation #3 (../config/1_Intro.txt)
 PASS: ABS(Quad.PosFollowErr) was less than 0.500000 for at least 0.800000 seconds
 ```
 
+### Scenario 2 - Atitude Control ###
 
+Body rate and roll/pitch control 
 
-### Scenario Intro 2 ###
+![Scenario 2](animations/scenario2.gif)
 
-### Scenario Intro 3 ###
+```
+SIMULATOR!
+Select main window to interact with keyboard/mouse:
+LEFT DRAG / X+LEFT DRAG / Z+LEFT DRAG = rotate, pan, zoom camera
+W/S/UP/LEFT/DOWN/RIGHT - apply force
+C - clear all graphs
+R - reset simulation
+Space - pause simulation
+Simulation #1 (../config/2_AttitudeControl.txt)
+Simulation #2 (../config/2_AttitudeControl.txt)
+PASS: ABS(Quad.Roll) was less than 0.025000 for at least 0.750000 seconds
+PASS: ABS(Quad.Omega.X) was less than 2.500000 for at least 0.750000 seconds
+Simulation #3 (../config/2_AttitudeControl.txt)
+PASS: ABS(Quad.Roll) was less than 0.025000 for at least 0.750000 seconds
+PASS: ABS(Quad.Omega.X) was less than 2.500000 for at least 0.750000 seconds
+Simulation #4 (../config/2_AttitudeControl.txt)
+PASS: ABS(Quad.Roll) was less than 0.025000 for at least 0.750000 seconds
+PASS: ABS(Quad.Omega.X) was less than 2.500000 for at least 0.750000 seconds
+```
 
-### Scenario Intro 4 ###
+### Scenario 3 - Position Control ###
 
-### Scenario Intro 5 ###
+Position/velocity and yaw angle control
+
+![Scenario 3](animations/scenario3.gif)
+
+```
+SIMULATOR!
+Select main window to interact with keyboard/mouse:
+LEFT DRAG / X+LEFT DRAG / Z+LEFT DRAG = rotate, pan, zoom camera
+W/S/UP/LEFT/DOWN/RIGHT - apply force
+C - clear all graphs
+R - reset simulation
+Space - pause simulation
+Simulation #1 (../config/3_PositionControl.txt)
+Simulation #2 (../config/3_PositionControl.txt)
+PASS: ABS(Quad1.Pos.X) was less than 0.100000 for at least 1.250000 seconds
+PASS: ABS(Quad2.Pos.X) was less than 0.100000 for at least 1.250000 seconds
+PASS: ABS(Quad2.Yaw) was less than 0.100000 for at least 1.000000 seconds
+Simulation #3 (../config/3_PositionControl.txt)
+PASS: ABS(Quad1.Pos.X) was less than 0.100000 for at least 1.250000 seconds
+PASS: ABS(Quad2.Pos.X) was less than 0.100000 for at least 1.250000 seconds
+PASS: ABS(Quad2.Yaw) was less than 0.100000 for at least 1.000000 seconds
+```
+
+### Scenario 4 - Non Idealities ###
+
+Non-idealities and robustness
+
+![Scenario 4](animations/scenario4.gif)
+
+```
+SIMULATOR!
+Select main window to interact with keyboard/mouse:
+LEFT DRAG / X+LEFT DRAG / Z+LEFT DRAG = rotate, pan, zoom camera
+W/S/UP/LEFT/DOWN/RIGHT - apply force
+C - clear all graphs
+R - reset simulation
+Space - pause simulation
+Simulation #1 (../config/4_Nonidealities.txt)
+Simulation #2 (../config/4_Nonidealities.txt)
+PASS: ABS(Quad1.PosFollowErr) was less than 0.100000 for at least 1.500000 seconds
+PASS: ABS(Quad2.PosFollowErr) was less than 0.100000 for at least 1.500000 seconds
+PASS: ABS(Quad3.PosFollowErr) was less than 0.100000 for at least 1.500000 seconds
+```
+
+### Scenario 5 - Tracking ###
+
+Tracking trajectories
+
+![Scenario 5](animations/scenario5.gif)
+
+```
+SIMULATOR!
+Select main window to interact with keyboard/mouse:
+LEFT DRAG / X+LEFT DRAG / Z+LEFT DRAG = rotate, pan, zoom camera
+W/S/UP/LEFT/DOWN/RIGHT - apply force
+C - clear all graphs
+R - reset simulation
+Space - pause simulation
+Simulation #1 (../config/5_TrajectoryFollow.txt)
+Simulation #2 (../config/5_TrajectoryFollow.txt)
+PASS: ABS(Quad2.PosFollowErr) was less than 0.250000 for at least 3.000000 seconds
+```
