@@ -2,6 +2,9 @@
 
 This is the writeup for the C++ project.
 
+![Image of Controller Logic](images/control1.png)
+![Image of Controller Logic](images/control2.png)
+
 ## Implemented body rate control in C++ ##
 
 The controller should be a proportional controller on body rates to commanded moments. The controller should take into account the moments of inertia of the drone when calculating the commanded moments.
